@@ -251,7 +251,6 @@ body {
   border-radius: 50%;
   padding: 10px;
   background: linear-gradient(135deg, var(--accent), var(--accent-dim), var(--accent-dark));
-  animation: rotate 20s linear infinite;
   box-shadow: var(--shadow-glow);
 }
 
