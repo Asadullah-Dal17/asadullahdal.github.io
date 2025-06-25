@@ -278,7 +278,7 @@ body {
   color: var(--bg-primary);
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
   z-index: 3;
   white-space: nowrap;
