@@ -11,8 +11,15 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+  <!-- Animated background elements -->
+  <div class="bg-shapes">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="shape-3"></div>
+  </div>
+
   <!-- Dark mode toggle button -->
-  <button id="darkModeToggle" title="Toggle dark mode">
+  <button id="darkModeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
     <i id="darkModeIcon" class="fas fa-moon"></i>
   </button>
 
@@ -21,36 +28,38 @@
     <div class="container">
       <div class="header-content hero-flex">
         <div class="profile-img-hero">
-          <img src="assets/images/profile.jpg" alt="Asadullah Dal" class="profile-image-hero">
-          <div class="availability-badge">Available for consulting</div>
+          <div class="profile-frame">
+            <img src="assets/images/profile.png" alt="Asadullah Dal" class="profile-image-hero">
+          </div>
+          <div class="availability-badge pulse">Available for consulting</div>
         </div>
         <div class="header-info">
-          <h1>Asadullah Dal</h1>
-          <div class="subtitle-hero">
-            <span class="typing-animation" data-strings='["Computer Vision Engineer", "AI Consultant", "Educator", "Open Source Contributor"]'></span>
+          <h1 class="slide-up">Asadullah Dal</h1>
+          <div class="subtitle-hero fade-in" style="--delay: 0.2s">
+            <span class="typing-animation" data-strings='["Computer Vision Engineer", "AI Consultant", "OpenCV Specialist", "Python Developer"]'></span>
           </div>
-          <div class="role">Specializing in AI-driven solutions and computer vision applications</div>
-          <div class="bio">
-            I transform complex AI concepts into practical solutions. With expertise in computer vision and machine learning, I help businesses implement cutting-edge technology while mentoring the next generation of developers.
+          <div class="role fade-in" style="--delay: 0.4s">Specializing in AI-driven computer vision solutions</div>
+          <div class="bio fade-in" style="--delay: 0.6s">
+            I develop cutting-edge computer vision systems using Python, OpenCV, and MediaPipe. My expertise includes real-time object detection, facial recognition, and augmented reality applications.
           </div>
-          <div class="cta-buttons">
+          <div class="cta-buttons fade-in" style="--delay: 0.8s">
             <a href="#contact" class="cta-button primary">Hire Me</a>
             <a href="assets/docs/Asadullah_Dal_CV.pdf" download class="cta-button secondary">Download CV</a>
           </div>
-          <div class="social-links-hero">
-            <a href="mailto:asadullah92c@gmail.com" class="social-link-hero" title="Email">
+          <div class="social-links-hero fade-in" style="--delay: 1s">
+            <a href="mailto:asadullah92c@gmail.com" class="social-link-hero" title="Email" aria-label="Email">
               <i class="fas fa-envelope"></i>
             </a>
-            <a href="https://www.linkedin.com/in/asadullah-dal/" class="social-link-hero" target="_blank" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/asadullah-dal/" class="social-link-hero" target="_blank" title="LinkedIn" aria-label="LinkedIn">
               <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://github.com/asadullah-dal17" class="social-link-hero" target="_blank" title="GitHub">
+            <a href="https://github.com/asadullah-dal17" class="social-link-hero" target="_blank" title="GitHub" aria-label="GitHub">
               <i class="fab fa-github"></i>
             </a>
-            <a href="https://youtube.com/@asadullah-dal" target="_blank" class="social-link-hero" title="YouTube">
+            <a href="https://youtube.com/@asadullah-dal" target="_blank" class="social-link-hero" title="YouTube" aria-label="YouTube">
               <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://kwork.com/user/asadullah92" class="social-link-hero" target="_blank" title="Freelance">
+            <a href="https://kwork.com/user/asadullah92" class="social-link-hero" target="_blank" title="Freelance" aria-label="Freelance">
               <i class="fas fa-briefcase"></i>
             </a>
           </div>
@@ -65,22 +74,22 @@
       <a href="#" class="logo">AD</a>
       <div class="nav-links">
         <a href="#about" class="nav-link">
-          <i class="fas fa-user"></i> About
+          <i class="fas fa-user"></i> <span>About</span>
         </a>
         <a href="#experience" class="nav-link">
-          <i class="fas fa-briefcase"></i> Experience
+          <i class="fas fa-briefcase"></i> <span>Experience</span>
         </a>
         <a href="#projects" class="nav-link">
-          <i class="fas fa-code"></i> Projects
+          <i class="fas fa-code"></i> <span>Projects</span>
         </a>
         <a href="#skills" class="nav-link">
-          <i class="fas fa-cogs"></i> Skills
+          <i class="fas fa-cogs"></i> <span>Skills</span>
         </a>
         <a href="#contact" class="nav-link">
-          <i class="fas fa-envelope"></i> Contact
+          <i class="fas fa-envelope"></i> <span>Contact</span>
         </a>
       </div>
-      <button class="menu-toggle" aria-label="Toggle navigation">
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </button>
     </div>
@@ -89,46 +98,65 @@
   <div class="container">
     <!-- About Section -->
     <section id="about" class="section">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content about-text-only">
+      <h2 class="section-title slide-up">Professional Profile</h2>
+      <div class="about-content about-text-only fade-in">
         <h3 class="about-name">Asadullah Dal</h3>
         <div class="about-role">Computer Vision Engineer & AI Consultant</div>
         <div class="about-location"><i class="fas fa-map-marker-alt"></i> Tando Muhammad Khan, Sindh, Pakistan</div>
         <div class="about-bio-formatted">
           <p class="intro">
-            I am a <span class="about-highlight">Computer Vision Developer</span>, freelancer, and teacher with a deep passion for artificial intelligence and technology. My journey in tech began with curiosity and has grown into a mission to build robust, real-world AI solutions.
+            I am a <span class="about-highlight">Computer Vision Specialist</span> with extensive experience in developing real-time vision systems using Python, OpenCV, and MediaPipe. My technical expertise spans the entire development lifecycle from prototyping to deployment.
           </p>
-          <p>
-            Over the past decade, I have worked on diverse projects, from developing advanced computer vision systems for industry to creating educational content that empowers others to learn and innovate.
-          </p>
-          <p>
-            I am a strong advocate for open knowledge and believe in the power of community-driven learning. Through my YouTube channel, blog, and workshops, I share insights, tutorials, and project walkthroughs to help others master computer vision and AI.
-          </p>
-          <ul class="about-list">
-            <li><span class="about-highlight">Current:</span> Junior School Teacher at Government Boys' High School Dadoon, where I inspire young minds in STEM.</li>
-            <li><span class="about-highlight">2025 Goal:</span> Launch more free courses on YouTube, including a comprehensive <a href="https://github.com/Asadullah-Dal17/AiPhile-Mediapipe-Course-2023" target="_blank" class="about-highlight">Mediapipe Course</a>.</li>
-          </ul>
+
+          <div class="expertise-section">
+            <h4><i class="fas fa-laptop-code"></i> Core Technical Skills</h4>
+            <ul class="about-list">
+              <li><span class="about-highlight">OpenCV:</span> 5+ years developing computer vision applications including object detection, facial recognition, and augmented reality</li>
+              <li><span class="about-highlight">Python:</span> Advanced proficiency with NumPy, Pandas, and scientific computing stack</li>
+              <li><span class="about-highlight">MediaPipe:</span> Extensive experience implementing real-time pose estimation and hand tracking</li>
+              <li><span class="about-highlight">Machine Learning:</span> Practical experience with TensorFlow, PyTorch, and scikit-learn</li>
+            </ul>
+          </div>
+
+          <div class="experience-highlights">
+            <h4><i class="fas fa-briefcase"></i> Professional Highlights</h4>
+            <ul class="about-list">
+              <li>Developed 50+ computer vision solutions for clients across healthcare, education, and security sectors</li>
+              <li>Created open-source educational content with 10K+ YouTube views on computer vision topics</li>
+              <li>Optimized vision algorithms achieving 40% performance improvements in real-time systems</li>
+              <li>Integrated computer vision with embedded systems (Raspberry Pi, Arduino) for IoT applications</li>
+            </ul>
+          </div>
+
+          <div class="education-section">
+            <h4><i class="fas fa-graduation-cap"></i> Teaching & Knowledge Sharing</h4>
+            <p>
+              As an educator, I've developed comprehensive courses on computer vision fundamentals and advanced topics. My teaching approach emphasizes practical implementation with real-world examples.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Metrics Section -->
     <section id="metrics" class="section">
+      <h2 class="section-title slide-up">Professional Impact</h2>
+
       <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-value">50+</div>
+        <div class="metric-card scale-in" style="--delay: 0.1s">
+          <div class="metric-value" data-count="50">0</div>
           <div class="metric-label">Projects Completed</div>
         </div>
-        <div class="metric-card">
-          <div class="metric-value">20+</div>
+        <div class="metric-card scale-in" style="--delay: 0.2s">
+          <div class="metric-value" data-count="20">0</div>
           <div class="metric-label">Satisfied Clients</div>
         </div>
-        <div class="metric-card">
-          <div class="metric-value">10K+</div>
-          <div class="metric-label">YouTube Views</div>
+        <div class="metric-card scale-in" style="--delay: 0.3s">
+          <div class="metric-value" data-count="10">0</div>
+          <div class="metric-label">K+ YouTube Views</div>
         </div>
-        <div class="metric-card">
-          <div class="metric-value">5+</div>
+        <div class="metric-card scale-in" style="--delay: 0.4s">
+          <div class="metric-value" data-count="5">0</div>
           <div class="metric-label">Years Experience</div>
         </div>
       </div>
@@ -136,10 +164,10 @@
 
     <!-- Experience Section -->
     <section id="experience" class="section">
-      <h2 class="section-title">Professional Journey</h2>
+      <h2 class="section-title slide-up">Professional Journey</h2>
 
       <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item slide-up" style="--delay: 0.1s">
           <div class="timeline-date">2022 – Present</div>
           <div class="timeline-content">
             <h3>Government Teacher (STEM Subjects)</h3>
@@ -152,7 +180,7 @@
           </div>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item slide-up" style="--delay: 0.2s">
           <div class="timeline-date">2021 – 2022</div>
           <div class="timeline-content">
             <h3>Computer Vision Developer</h3>
@@ -165,7 +193,7 @@
           </div>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item slide-up" style="--delay: 0.3s">
           <div class="timeline-date">2019 – Present</div>
           <div class="timeline-content">
             <h3>Freelance AI Developer</h3>
@@ -182,9 +210,9 @@
 
     <!-- Projects Section -->
     <section id="projects" class="section">
-      <h2 class="section-title">Featured Work</h2>
+      <h2 class="section-title slide-up">Featured Work</h2>
 
-      <div class="project-filters">
+      <div class="project-filters fade-in">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="computer-vision">Computer Vision</button>
         <button class="filter-btn" data-filter="education">Education</button>
@@ -192,9 +220,9 @@
       </div>
 
       <div class="projects-grid">
-        <div class="project-card" data-category="computer-vision">
+        <div class="project-card slide-up" data-category="computer-vision" style="--delay: 0.1s">
           <div class="project-image-container">
-            <img src="assets/images/projects/distance-measurement.jpg" alt="Distance Measurement" class="project-image">
+            <img src="assets/images/projects/distance-measurement.png" alt="Distance Measurement" class="project-image">
             <div class="project-overlay">
               <h3>Distance Measurement System</h3>
               <p>Real-time object distance calculation using monocular vision</p>
@@ -207,7 +235,7 @@
             </div>
             <h3 class="project-title">Single Camera Distance Measurement</h3>
             <p class="project-description">
-              Developed a real-time system that calculates object distance from a single camera with 95% accuracy within 5 meters, eliminating the need for stereo vision setups.
+              Developed a real-time system that calculates object distance from a single camera with 95% accuracy within 5 meters using OpenCV and Python.
             </p>
             <div class="project-stats">
               <div class="stat">
@@ -227,9 +255,9 @@
           </div>
         </div>
 
-        <div class="project-card" data-category="computer-vision">
+        <div class="project-card slide-up" data-category="computer-vision" style="--delay: 0.2s">
           <div class="project-image-container">
-            <img src="assets/images/projects/eyes-estimator.jpg" alt="Eyes Position Estimator" class="project-image">
+            <img src="assets/images/projects/eyes-estimator.png" alt="Eyes Position Estimator" class="project-image">
             <div class="project-overlay">
               <h3>Eyes Position Estimator</h3>
               <p>Real-time eye tracking with MediaPipe</p>
@@ -242,7 +270,7 @@
             </div>
             <h3 class="project-title">Eyes Position Estimator (MediaPipe)</h3>
             <p class="project-description">
-              Real-time eye position and gaze estimation using MediaPipe Face Mesh and OpenCV. Tracks and visualizes eye movement for accessibility, HCI, and research applications.
+              Real-time eye position and gaze estimation using MediaPipe Face Mesh and OpenCV. Tracks and visualizes eye movement for accessibility applications.
             </p>
             <div class="project-stats">
               <div class="stat">
@@ -262,9 +290,9 @@
           </div>
         </div>
 
-        <div class="project-card" data-category="computer-vision">
+        <div class="project-card slide-up" data-category="computer-vision" style="--delay: 0.3s">
           <div class="project-image-container">
-            <img src="assets/images/projects/face-robot.jpg" alt="Face Following Robot" class="project-image">
+            <img src="assets/images/projects/face-robot.png" alt="Face Following Robot" class="project-image">
             <div class="project-overlay">
               <h3>Face Following Robot</h3>
               <p>Autonomous robot that tracks human faces</p>
@@ -277,7 +305,7 @@
             </div>
             <h3 class="project-title">Face Following Robot using Distance Estimation</h3>
             <p class="project-description">
-              An intelligent robot that detects and follows a human face using real-time distance estimation with computer vision. Integrates OpenCV, Python, and robotics hardware for autonomous movement and tracking.
+              An intelligent robot that detects and follows a human face using real-time distance estimation with OpenCV and Python, integrated with Raspberry Pi.
             </p>
             <div class="project-stats">
               <div class="stat">
@@ -301,19 +329,19 @@
 
     <!-- Skills Section -->
     <section id="skills" class="section">
-      <h2 class="section-title">Technical Expertise</h2>
+      <h2 class="section-title slide-up">Technical Expertise</h2>
       <div class="skills-grid">
-        <div class="skill-category">
+        <div class="skill-category slide-up" style="--delay: 0.1s">
           <h3><i class="fas fa-eye"></i> Computer Vision</h3>
           <div class="skill-list">
             <span class="skill-tag">OpenCV</span>
             <span class="skill-tag">MediaPipe</span>
-            <span class="skill-tag">YOLO</span>
             <span class="skill-tag">Dlib</span>
+            <span class="skill-tag">YOLO</span>
             <span class="skill-tag">Image Processing</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category slide-up" style="--delay: 0.2s">
           <h3><i class="fas fa-brain"></i> Machine Learning</h3>
           <div class="skill-list">
             <span class="skill-tag">TensorFlow</span>
@@ -323,17 +351,17 @@
             <span class="skill-tag">Deep Learning</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category slide-up" style="--delay: 0.3s">
           <h3><i class="fas fa-code"></i> Programming</h3>
           <div class="skill-list">
             <span class="skill-tag">Python</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">Pandas</span>
             <span class="skill-tag">C++</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">Linux</span>
             <span class="skill-tag">Bash</span>
           </div>
         </div>
-        <div class="skill-category">
+        <div class="skill-category slide-up" style="--delay: 0.4s">
           <h3><i class="fas fa-microchip"></i> Hardware</h3>
           <div class="skill-list">
             <span class="skill-tag">Raspberry Pi</span>
@@ -347,72 +375,53 @@
 
     <!-- Tools Section -->
     <section id="tools" class="section">
-      <h2 class="section-title">Tools & Technologies</h2>
+      <h2 class="section-title slide-up">Core Development Tools</h2>
       <div class="tools-row">
-        <div class="tool-icon" title="VS Code">
-          <i class="fas fa-laptop-code"></i>
-          <span>VS Code</span>
+        <div class="tool-icon slide-up" title="Python" style="--delay: 0.1s">
+          <i class="fab fa-python"></i>
+          <span>Python</span>
         </div>
-        <div class="tool-icon" title="Git">
+        <div class="tool-icon slide-up" title="OpenCV" style="--delay: 0.2s">
+          <i class="fas fa-camera"></i>
+          <span>OpenCV</span>
+        </div>
+        <div class="tool-icon slide-up" title="MediaPipe" style="--delay: 0.3s">
+          <i class="fas fa-project-diagram"></i>
+          <span>MediaPipe</span>
+        </div>
+        <div class="tool-icon slide-up" title="NumPy" style="--delay: 0.4s">
+          <i class="fas fa-square-root-alt"></i>
+          <span>NumPy</span>
+        </div>
+        <div class="tool-icon slide-up" title="TensorFlow" style="--delay: 0.5s">
+          <i class="fas fa-brain"></i>
+          <span>TensorFlow</span>
+        </div>
+        <div class="tool-icon slide-up" title="PyTorch" style="--delay: 0.6s">
+          <i class="fas fa-fire"></i>
+          <span>PyTorch</span>
+        </div>
+        <div class="tool-icon slide-up" title="Git" style="--delay: 0.7s">
           <i class="fab fa-git-alt"></i>
           <span>Git</span>
         </div>
-        <div class="tool-icon" title="Docker">
-          <i class="fab fa-docker"></i>
-          <span>Docker</span>
+        <div class="tool-icon slide-up" title="VS Code" style="--delay: 0.8s">
+          <i class="fas fa-laptop-code"></i>
+          <span>VS Code</span>
         </div>
-        <div class="tool-icon" title="Linux">
-          <i class="fab fa-linux"></i>
-          <span>Linux</span>
-        </div>
-        <div class="tool-icon" title="Jupyter">
-          <i class="fas fa-book"></i>
-          <span>Jupyter</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-      <h2 class="section-title">Client & Colleague Feedback</h2>
-
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-content">
-            <i class="fas fa-quote-left quote-icon"></i>
-            <p>Asadullah delivered our computer vision project ahead of schedule with exceptional quality. His attention to detail and problem-solving skills are remarkable.</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="assets/images/clients/client1.jpg" alt="Client" class="author-image">
-            <div class="author-info">
-              <h4>Sarah Johnson</h4>
-              <div class="author-role">CTO, TechSolutions Inc.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-content">
-            <i class="fas fa-quote-left quote-icon"></i>
-            <p>Working with Asadullah on our AI curriculum was a game-changer for our students. He makes complex concepts accessible and engaging.</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="assets/images/clients/client2.jpg" alt="Client" class="author-image">
-            <div class="author-info">
-              <h4>Michael Chen</h4>
-              <div class="author-role">Director, STEM Academy</div>
-            </div>
-          </div>
+        <div class="tool-icon slide-up" title="Raspberry Pi" style="--delay: 0.9s">
+          <i class="fas fa-microchip"></i>
+          <span>Raspberry Pi</span>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-      <h2 class="section-title">Let's Collaborate</h2>
+      <h2 class="section-title slide-up">Let's Collaborate</h2>
 
       <div class="contact-container">
-        <div class="contact-info">
+        <div class="contact-info slide-up" style="--delay: 0.1s">
           <h3>Contact Information</h3>
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
@@ -443,7 +452,7 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form slide-up" id="contactForm" style="--delay: 0.2s">
           <div class="form-group">
             <input type="text" placeholder="Your Name" required>
           </div>
