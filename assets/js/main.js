@@ -1,3 +1,5 @@
+// main.js - Complete with all functionality
+
 document.addEventListener('DOMContentLoaded', function() {
   // =====================
   // Dark Mode Toggle
@@ -11,10 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Set initial mode
   if (storedPref === null) {
-    // No preference stored, use system preference
     setDarkMode(prefersDark);
   } else {
-    // Use stored preference
     setDarkMode(storedPref === 'true');
   }
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // =====================
   const typingElement = document.querySelector('.typing-animation');
   if (typingElement) {
-    const strings = JSON.parse(typingElement.getAttribute('data-strings'));
+    const strings = ["Computer Vision Developer", "JEST Educator", "AI Solutions Provider", "OpenCV Specialist"];
     let currentString = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Filter projects
       projectCards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
+        if (filter === 'all' || card.dataset.category.includes(filter)) {
           card.style.display = 'block';
           setTimeout(() => {
             card.style.opacity = '1';
@@ -161,6 +161,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // =====================
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    // Budget slider functionality
+    const budgetRange = document.getElementById('budgetRange');
+    const budgetValue = document.getElementById('budgetValue');
+
+    if (budgetRange && budgetValue) {
+      budgetRange.addEventListener('input', () => {
+        budgetValue.textContent = budgetRange.value;
+      });
+    }
+
+    // Form submission handler
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -168,13 +179,135 @@ document.addEventListener('DOMContentLoaded', function() {
       const formData = new FormData(contactForm);
       const data = Object.fromEntries(formData);
 
+      // Simple validation
+      if (!data.name || !data.email || !data.message) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
       // Here you would typically send the data to a server
       console.log('Form submitted:', data);
 
       // Show success message
-      alert('Thank you for your message! I will get back to you soon.');
+      const successMsg = document.createElement('div');
+      successMsg.className = 'form-success';
+      successMsg.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <p>Thank you for your message! I will get back to you soon.</p>
+      `;
+      contactForm.parentNode.insertBefore(successMsg, contactForm.nextSibling);
       contactForm.reset();
+
+      setTimeout(() => {
+        successMsg.style.opacity = '0';
+        setTimeout(() => successMsg.remove(), 300);
+      }, 3000);
     });
+  }
+
+  // =====================
+  // Testimonials Carousel
+  // =====================
+  const carousel = document.querySelector('.testimonials-carousel');
+  const prevBtn = document.querySelector('.carousel-nav.prev');
+  const nextBtn = document.querySelector('.carousel-nav.next');
+  const testimonialCards = document.querySelectorAll('.testimonial-card');
+  let currentIndex = 0;
+
+  if (carousel && prevBtn && nextBtn) {
+    // Set up carousel navigation
+    function updateCarousel() {
+      const cardWidth = testimonialCards[0].offsetWidth + 24; // Include margin
+      carousel.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialCards.length - 1;
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex < testimonialCards.length - 1) ? currentIndex + 1 : 0;
+      updateCarousel();
+    });
+
+    // Handle touch events for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const threshold = 50;
+      if (touchEndX < touchStartX - threshold) {
+        // Swipe left - next
+        currentIndex = (currentIndex < testimonialCards.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+      } else if (touchEndX > touchStartX + threshold) {
+        // Swipe right - previous
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialCards.length - 1;
+        updateCarousel();
+      }
+    }
+  }
+
+  // =====================
+  // Project Demo Modal
+  // =====================
+  const demoModal = document.querySelector('.project-demo-modal');
+  const closeModalBtn = document.querySelector('.close-modal');
+  const demoLinks = document.querySelectorAll('.project-link.demo');
+
+  if (demoModal && closeModalBtn) {
+    // Close modal
+    closeModalBtn.addEventListener('click', () => {
+      demoModal.style.display = 'none';
+    });
+
+    // Close when clicking outside modal content
+    demoModal.addEventListener('click', (e) => {
+      if (e.target === demoModal) {
+        demoModal.style.display = 'none';
+      }
+    });
+
+    // Handle demo links
+    if (demoLinks) {
+      demoLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const projectCard = link.closest('.project-card');
+          const projectTitle = projectCard.querySelector('.project-title').textContent;
+          const projectDescription = projectCard.querySelector('.project-description').textContent;
+          const demoUrl = link.getAttribute('href');
+          const githubLink = projectCard.querySelector('.project-link.code').getAttribute('href');
+
+          // Set modal content
+          demoModal.querySelector('.demo-title').textContent = projectTitle;
+          demoModal.querySelector('.demo-description').textContent = projectDescription;
+          demoModal.querySelector('#demo-github-link').setAttribute('href', githubLink);
+
+          // Set iframe source
+          const videoUrl = demoUrl.includes('youtube.com')
+            ? demoUrl.replace('watch?v=', 'embed/')
+            : demoUrl;
+          demoModal.querySelector('iframe').setAttribute('src', videoUrl);
+
+          // Show modal
+          demoModal.style.display = 'block';
+        });
+      });
+    }
   }
 
   // =====================
@@ -232,6 +365,32 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   // =====================
+  // Skill Bars Animation
+  // =====================
+  const animateSkillBars = () => {
+    const skillBars = document.querySelectorAll('.skill-progress');
+
+    skillBars.forEach(bar => {
+      const width = bar.getAttribute('data-width');
+      bar.style.width = width + '%';
+    });
+  };
+
+  // Check if skills section is in view
+  const checkSkills = () => {
+    const skillsSection = document.getElementById('skills');
+    if (skillsSection) {
+      const skillsPosition = skillsSection.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.3;
+
+      if (skillsPosition < screenPosition) {
+        animateSkillBars();
+        window.removeEventListener('scroll', checkSkills);
+      }
+    }
+  };
+
+  // =====================
   // Initialize Animations
   // =====================
   // Set initial state for animation
@@ -249,11 +408,13 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('load', () => {
     animateOnScroll();
     checkCounters();
+    checkSkills();
   });
 
   window.addEventListener('scroll', () => {
     animateOnScroll();
     checkCounters();
+    checkSkills();
   });
 
   // =====================
@@ -273,6 +434,39 @@ document.addEventListener('DOMContentLoaded', function() {
       if (span && !link.classList.contains('active')) {
         span.style.transform = 'translateX(0)';
       }
+    });
+  });
+
+  // =====================
+  // Tool Icon Animations
+  // =====================
+  const toolIcons = document.querySelectorAll('.tool-icon');
+  toolIcons.forEach(icon => {
+    icon.addEventListener('mouseenter', () => {
+      const title = icon.getAttribute('title');
+      if (title) {
+        // Add specific animations based on tool name
+        const iconElement = icon.querySelector('i');
+        switch(title) {
+          case 'Python':
+            iconElement.style.animation = 'spinIcon 0.8s';
+            break;
+          case 'OpenCV':
+            iconElement.style.animation = 'pulseIcon 0.7s';
+            break;
+          case 'MediaPipe':
+            iconElement.style.animation = 'floatIcon 1s infinite alternate';
+            break;
+          case 'TensorFlow':
+            iconElement.style.animation = 'pulseIcon 0.7s infinite alternate';
+            break;
+        }
+      }
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      const iconElement = icon.querySelector('i');
+      iconElement.style.animation = '';
     });
   });
 });
