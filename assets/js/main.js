@@ -206,62 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // =====================
-  // Testimonials Carousel
-  // =====================
-  const carousel = document.querySelector('.testimonials-carousel');
-  const prevBtn = document.querySelector('.carousel-nav.prev');
-  const nextBtn = document.querySelector('.carousel-nav.next');
-  const testimonialCards = document.querySelectorAll('.testimonial-card');
-  let currentIndex = 0;
-
-  if (carousel && prevBtn && nextBtn) {
-    // Set up carousel navigation
-    function updateCarousel() {
-      const cardWidth = testimonialCards[0].offsetWidth + 24; // Include margin
-      carousel.scrollTo({
-        left: currentIndex * cardWidth,
-        behavior: 'smooth'
-      });
-    }
-
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialCards.length - 1;
-      updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex < testimonialCards.length - 1) ? currentIndex + 1 : 0;
-      updateCarousel();
-    });
-
-    // Handle touch events for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carousel.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-      const threshold = 50;
-      if (touchEndX < touchStartX - threshold) {
-        // Swipe left - next
-        currentIndex = (currentIndex < testimonialCards.length - 1) ? currentIndex + 1 : 0;
-        updateCarousel();
-      } else if (touchEndX > touchStartX + threshold) {
-        // Swipe right - previous
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialCards.length - 1;
-        updateCarousel();
-      }
-    }
-  }
-
-  // =====================
   // Project Demo Modal
   // =====================
   const demoModal = document.querySelector('.project-demo-modal');

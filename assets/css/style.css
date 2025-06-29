@@ -5,7 +5,7 @@
 :root {
   --bg-primary: #f9fafb;
   --bg-secondary: #f3f6fa;
-  --bg-card: #ffffff;
+  --bg-card: #130101;
   --bg-card-hover: #f8fafc;
   --text-primary: #1a2233;
   --text-secondary: #3a4664;
@@ -16,8 +16,8 @@
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
   --shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
-  --shadow-hover: 0 8px 30px rgba(59, 130, 246, 0.12);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.09);
+  --shadow-hover: 0 8px 30px rgba(17, 106, 250, 0.685);
+  --shadow-glow: 0 0 20px rgba(8, 69, 167, 0.548); /* Increased opacity for better visibility */
   --radius: 12px;
   --radius-small: 8px;
   --radius-large: 16px;
@@ -195,7 +195,14 @@ body {
     transform: scale(1.05);
   }
 }
-
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 .fade-in {
   animation: fadeIn 0.6s ease-out forwards;
   opacity: 0;
@@ -342,6 +349,7 @@ body {
   50% { border-color: var(--accent) }
 }
 
+/* Replace typing animation with this */
 .typing-animation {
   display: inline-block;
   overflow: hidden;
@@ -349,9 +357,11 @@ body {
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: .15em;
-  animation:
-    typing 3.5s steps(40, end),
+  animation: 
+    typing 3.5s steps(40, end) forwards,
     blink-caret .75s step-end infinite;
+  opacity: 0;
+  animation-delay: 0.5s;
 }
 
 /* CTA buttons */
@@ -673,6 +683,7 @@ body {
 
 .timeline-content:hover {
   transform: translateX(5px);
+  box-shadow: var(--shadow-hover);
 }
 
 .timeline-date {
@@ -751,9 +762,12 @@ body {
   box-shadow: var(--shadow);
 }
 
+
 .teaching-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+  animation: floatCard 3s ease-in-out infinite;
 }
 
 .teaching-icon {
@@ -867,10 +881,14 @@ body {
 }
 
 .project-card:hover {
-  border-color: var(--border-hover);
+  border-color: var(--accent);
   background: var(--bg-card-hover);
   transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
+  animation: floatCard 3s ease-in-out infinite;
+}
+.project-card:hover .project-image {
+  transform: scale(1.1) rotate(1deg);
 }
 
 .project-image-container {
@@ -1047,6 +1065,7 @@ body {
 .github-cta:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .github-stats {
@@ -1066,125 +1085,6 @@ body {
 .github-stats .stat i {
   color: var(--accent);
 }
-
-/* Testimonials Section */
-.testimonials-container {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 50px;
-}
-
-.testimonials-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  margin: 2rem 0;
-  padding-bottom: 1rem;
-  scrollbar-width: none;
-}
-
-.testimonials-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.testimonial-card {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  background: var(--bg-card);
-  border-radius: var(--radius-large);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-  margin-right: 1.5rem;
-  transition: var(--transition);
-}
-
-.testimonial-content {
-  position: relative;
-  margin-bottom: 1.5rem;
-}
-
-.quote-icon {
-  color: var(--accent-dim);
-  font-size: 2.5rem;
-  opacity: 0.3;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-}
-
-.testimonial-content p {
-  font-style: italic;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  padding: 0 1rem;
-}
-
-.rating {
-  color: var(--accent);
-  margin-top: 1rem;
-  font-size: 1.1rem;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  margin-top: 1.5rem;
-}
-
-.testimonial-author img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 1rem;
-  border: 2px solid var(--accent-dim);
-}
-
-.testimonial-author h4 {
-  color: var(--text-primary);
-  margin-bottom: 0.3rem;
-}
-
-.testimonial-author span {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.carousel-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-  color: var(--accent);
-  transition: var(--transition-fast);
-}
-
-.carousel-nav:hover {
-  background: var(--accent);
-  color: var(--bg-primary);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-nav.prev {
-  left: 0;
-}
-
-.carousel-nav.next {
-  right: 0;
-}
-
 /* Skills Grid */
 .skills-grid {
   display: grid;
@@ -1201,6 +1101,12 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+
+.skill-category:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .skill-category h3 {
@@ -1231,13 +1137,6 @@ body {
   opacity: 1;
 }
 
-.skill-category:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-}
-
 .skill-meter {
   margin-bottom: 1.2rem;
 }
@@ -1262,14 +1161,36 @@ body {
   overflow: hidden;
 }
 
+/* Replace the skill-progress with this */
 .skill-progress {
   height: 100%;
   background: linear-gradient(90deg, var(--accent), var(--accent-dim));
   border-radius: 4px;
   width: 0;
-  transition: width 1s ease-out;
+  transition: width 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  position: relative;
+  overflow: hidden;
 }
 
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0.1) 100%);
+  background-size: 200% 100%;
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 .skill-list {
   display: flex;
   flex-wrap: wrap;
@@ -1323,6 +1244,12 @@ body {
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+  transform: translateY(-4px);
+  transition: transform 0.3s;
+}
+
+.badge-card:hover::before {
+  transform: translateY(0);
 }
 
 .badge-icon {
@@ -1336,20 +1263,44 @@ body {
   justify-content: center;
   font-size: 1.8rem;
   color: var(--accent);
+  transition: var(--transition);
+}
+
+.badge-card:hover .badge-icon {
+  transform: scale(1.1) rotate(10deg);
+  background: rgba(59, 130, 246, 0.2);
 }
 
 .badge-card h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.badge-card:hover h3 {
+  color: var(--accent);
 }
 
 .badge-card p {
   color: var(--text-secondary);
   margin-bottom: 1rem;
   font-size: 0.95rem;
+  transition: var(--transition-fast);
 }
 
+.badge-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+  animation: floatCard 3s ease-in-out infinite;
+}
+
+.badge-card:hover .badge-icon {
+  transform: scale(1.1) rotate(10deg);
+  background: rgba(59, 130, 246, 0.2);
+  animation: pulse 2s infinite;
+}
 .badge-date {
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -1358,11 +1309,18 @@ body {
   font-size: 0.8rem;
   color: var(--text-muted);
   font-family: var(--font-code);
+  transition: var(--transition-fast);
+}
+
+.badge-card:hover .badge-date {
+  background: var(--accent);
+  color: var(--bg-primary);
 }
 
 .badge-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .dark-mode .badge-icon {
@@ -1433,7 +1391,19 @@ body {
   opacity: 0.8;
   box-shadow: 0 0 16px 2px var(--accent);
 }
+.tool-icon:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+  animation: floatCard 3s ease-in-out infinite;
+}
 
+.tool-icon:hover i {
+  color: var(--accent);
+  transform: scale(1.2) rotate(-10deg);
+  animation: pulse 1s infinite;
+}
 .tool-icon i {
   font-size: 2.5rem;
   color: var(--accent);
@@ -1529,6 +1499,7 @@ body {
 .contact-info:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .contact-info h3 {
@@ -1612,6 +1583,7 @@ body {
 .contact-form:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 
 .form-group {
