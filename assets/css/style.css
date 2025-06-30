@@ -5,7 +5,7 @@
 :root {
   --bg-primary: #f9fafb;
   --bg-secondary: #f3f6fa;
-  --bg-card: #130101;
+  --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
   --text-primary: #1a2233;
   --text-secondary: #3a4664;
@@ -16,7 +16,7 @@
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
   --shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
-  --shadow-hover: 0 8px 30px rgba(17, 106, 250, 0.685);
+  --shadow-hover: 0 8px 30px rgba(17, 106, 250, 0.281);
   --shadow-glow: 0 0 20px rgba(8, 69, 167, 0.548); /* Increased opacity for better visibility */
   --radius: 12px;
   --radius-small: 8px;
@@ -634,6 +634,7 @@ body {
   bottom: 0;
   left: 50%;
   margin-left: -1px;
+  z-index: 1;
 }
 
 .timeline-item {
@@ -641,6 +642,11 @@ body {
   position: relative;
   width: 50%;
   box-sizing: border-box;
+  z-index: 2; 
+  transition: z-index 0s ease 0.3s
+}
+.timeline-item:hover{
+  z-index: 10;
 }
 
 .timeline-item::after {
@@ -652,7 +658,7 @@ body {
   border: 3px solid var(--accent);
   border-radius: 50%;
   top: 15px;
-  z-index: 1;
+  z-index: 3
 }
 
 .left {
@@ -679,11 +685,13 @@ body {
   position: relative;
   transition: var(--transition);
   border-left: 3px solid var(--accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s ease 0s; /* Add z-index to transition (optional, see note below) */
 }
 
 .timeline-content:hover {
-  transform: translateX(5px);
+  transform: translateX(23%);
   box-shadow: var(--shadow-hover);
+  /* z-index: 15; Ensure the hovered item is above others */
 }
 
 .timeline-date {
