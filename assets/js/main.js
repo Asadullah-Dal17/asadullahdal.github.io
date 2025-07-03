@@ -49,36 +49,36 @@ document.addEventListener('DOMContentLoaded', function() {
   // =====================
   const typingElement = document.querySelector('.typing-animation');
   if (typingElement) {
-    const strings = ["Computer Vision Developer", "JEST Educator", "AI Solutions Provider", "OpenCV Specialist"];
-    let currentString = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let isEnd = false;
-
+    let strings = typingElement.dataset.strings;
+    try {
+      strings = JSON.parse(strings);
+    } catch {
+      strings = ["Portfolio Website"];
+    }
+    let currentString = 0, charIndex = 0, isDeleting = false;
     function type() {
       const fullTxt = strings[currentString];
-
+      // Split text and cursor for perfect caret placement
+      typingElement.innerHTML =
+        `<span class="typed-text">${fullTxt.substring(0, charIndex)}</span><span class="blinking-caret">|</span>`;
+      const caret = typingElement.querySelector('.blinking-caret');
+      caret.style.animation = 'blink-caret 0.75s step-end infinite';
       if (isDeleting) {
-        typingElement.textContent = fullTxt.substring(0, charIndex--);
+        charIndex--;
       } else {
-        typingElement.textContent = fullTxt.substring(0, charIndex++);
+        charIndex++;
       }
-
-      if (!isDeleting && charIndex === fullTxt.length) {
-        isEnd = true;
-        isDeleting = true;
-        setTimeout(type, 1500);
-      } else if (isDeleting && charIndex === 0) {
+      if (!isDeleting && charIndex > fullTxt.length) {
+        setTimeout(() => { isDeleting = true; type(); }, 1200);
+      } else if (isDeleting && charIndex < 0) {
         isDeleting = false;
         currentString = (currentString + 1) % strings.length;
-        setTimeout(type, 500);
+        setTimeout(type, 400);
       } else {
-        const speed = isDeleting ? 50 : isEnd ? 100 : 150;
-        setTimeout(type, speed);
+        setTimeout(type, isDeleting ? 60 : 120);
       }
     }
-
-    setTimeout(type, 1000);
+    setTimeout(type, 600);
   }
 
   // =====================

@@ -339,6 +339,22 @@ body {
 }
 
 /* Typing animation */
+.typing-animation {
+  display: inline-block;
+  overflow: hidden;
+  /* Remove border-right to avoid double caret */
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em;
+  max-width: 100%;
+  /* Remove animation from CSS, will be handled by JS for dynamic typing */
+  animation: none;
+}
+
+.typing-animation.typing {
+  animation: typing 2.5s steps(30, end) 1s 1 normal both, blink-caret 0.75s step-end infinite;
+}
+
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
@@ -349,19 +365,17 @@ body {
   50% { border-color: var(--accent) }
 }
 
-/* Replace typing animation with this */
-.typing-animation {
+.blinking-caret {
   display: inline-block;
-  overflow: hidden;
-  border-right: .15em solid var(--accent);
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: .15em;
-  animation: 
-    typing 3.5s steps(40, end) forwards,
-    blink-caret .75s step-end infinite;
-  opacity: 0;
-  animation-delay: 0.5s;
+  width: 1ch;
+  color: var(--accent);
+  font-weight: 600;
+  animation: blink-caret 0.75s step-end infinite;
+  vertical-align: baseline;
+}
+@keyframes blink-caret {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* CTA buttons */
@@ -550,6 +564,7 @@ body {
   padding: 5rem 0;
   border-bottom: 1px solid var(--border);
   position: relative;
+  scroll-margin-top: 100px !important; /* Ensures section is visible below sticky navbar */
 }
 
 .section:last-child {
