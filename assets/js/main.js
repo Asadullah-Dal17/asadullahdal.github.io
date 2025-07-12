@@ -6,11 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const icon = document.getElementById('darkModeIcon');
   const nav = document.querySelector('.nav');
 
-  // Check system preference and local storage
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const storedPref = localStorage.getItem('darkMode');
 
-  // Set initial mode
   function setDarkMode(on) {
     document.body.classList.toggle('dark-mode', on);
     if (icon) {
@@ -280,7 +278,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       );
       skillMeters.forEach((meter, index) => {
-        meter.style.setProperty('--delay', `${index * 0.1}s`);
+        // Calculate delay based on position within category
+        const category = meter.closest('.skill-category');
+        const metersInCategory = category.querySelectorAll('.skill-meter');
+        const categoryIndex = Array.from(document.querySelectorAll('.skill-category')).indexOf(category);
+        const meterIndex = Array.from(metersInCategory).indexOf(meter);
+        const baseDelay = categoryIndex * 0.4; // Base delay from category
+        const delay = baseDelay + meterIndex * 0.1; // Incremental delay within category
+        meter.style.setProperty('--delay', `${delay}s`);
         skillsObserver.observe(meter);
       });
       console.log('Skills observer initialized');
