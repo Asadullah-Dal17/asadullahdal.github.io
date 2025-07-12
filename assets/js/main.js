@@ -1,30 +1,265 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // === Dark Mode Toggle ===
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      // Persist dark mode preference in localStorage
-      if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
+  // =====================
+  // Dark Mode Toggle
+  // =====================
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const icon = document.getElementById('darkModeIcon');
+  const nav = document.querySelector('.nav');
+
+  // Check system preference and local storage
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const storedPref = localStorage.getItem('darkMode');
+
+  // Set initial mode
+  function setDarkMode(on) {
+    document.body.classList.toggle('dark-mode', on);
+    if (icon) {
+      icon.className = on ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    localStorage.setItem('darkMode', on);
+    if (nav) {
+      nav.style.background = on ? 'rgba(10, 10, 10, 0.95)' : 'rgba(252, 249, 245, 0.95)';
+    }
+  }
+
+  if (toggleBtn) {
+    if (storedPref === null) {
+      setDarkMode(prefersDark);
+    } else {
+      setDarkMode(storedPref === 'true');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('dark-mode');
+      setDarkMode(!isDark);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (localStorage.getItem('darkMode') === null) {
+        setDarkMode(e.matches);
       }
     });
-    // Apply saved theme on load
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
   } else {
     console.warn('Dark mode toggle element (#darkModeToggle) not found.');
   }
 
-  // === Skills Animation ===
-  const skillMeters = document.querySelectorAll('.skill-meter');
-  if (skillMeters.length === 0) {
-    console.warn('No .skill-meter elements found in the DOM.');
+  // =====================
+  // Typing Animation
+  // =====================
+  const typingElement = document.querySelector('.typing-animation');
+  if (typingElement) {
+    let strings = typingElement.dataset.strings;
+    try {
+      strings = JSON.parse(strings);
+    } catch {
+      strings = ['Portfolio Website'];
+    }
+    let currentString = 0,
+      charIndex = 0,
+      isDeleting = false;
+    function type() {
+      const fullTxt = strings[currentString];
+      typingElement.innerHTML = `<span class="typed-text">${fullTxt.substring(0, charIndex)}</span><span class="blinking-caret">|</span>`;
+      const caret = typingElement.querySelector('.blinking-caret');
+      if (caret) {
+        caret.style.animation = 'blink-caret 0.75s step-end infinite';
+      }
+      if (isDeleting) {
+        charIndex--;
+      } else {
+        charIndex++;
+      }
+      if (!isDeleting && charIndex > fullTxt.length) {
+        setTimeout(() => {
+          isDeleting = true;
+          type();
+        }, 1200);
+      } else if (isDeleting && charIndex < 0) {
+        isDeleting = false;
+        currentString = (currentString + 1) % strings.length;
+        setTimeout(type, 400);
+      } else {
+        setTimeout(type, isDeleting ? 60 : 120);
+      }
+    }
+    setTimeout(type, 600);
   } else {
-    // Fallback for browsers without IntersectionObserver
+    console.warn('Typing animation element (.typing-animation) not found.');
+  }
+
+  // =====================
+  // Project Filtering
+  // =====================
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category.includes(filter)) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  } else {
+    console.warn('No .filter-btn elements found for project filtering.');
+  }
+
+  // =====================
+  // Smooth Scrolling
+  // =====================
+  const navLinksItems = document.querySelectorAll('a[href^="#"]');
+  if (navLinksItems.length > 0) {
+    navLinksItems.forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth',
+          });
+          const navLinks = document.querySelector('.nav-links');
+          if (navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle) {
+              menuToggle.classList.remove('active');
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+        }
+      });
+    });
+  } else {
+    console.warn('No navigation links (a[href^="#"]) found.');
+  }
+
+  // =====================
+  // Mobile Menu Toggle
+  // =====================
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      navLinks.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+    });
+  } else {
+    console.warn('Mobile menu elements (.menu-toggle or .nav-links) not found.');
+  }
+
+  // =====================
+  // Contact Form
+  // =====================
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    const budgetRange = document.getElementById('budgetRange');
+    const budgetValue = document.getElementById('budgetValue');
+    if (budgetRange && budgetValue) {
+      budgetRange.addEventListener('input', () => {
+        budgetValue.textContent = budgetRange.value;
+      });
+    } else {
+      console.warn('Budget slider elements (#budgetRange or #budgetValue) not found.');
+    }
+
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData);
+      if (!data.name || !data.email || !data.message) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      console.log('Form submitted:', data);
+      const successMsg = document.createElement('div');
+      successMsg.className = 'form-success';
+      successMsg.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <p>Thank you for your message! I will get back to you soon.</p>
+      `;
+      contactForm.parentNode.insertBefore(successMsg, contactForm.nextSibling);
+      contactForm.reset();
+      setTimeout(() => {
+        successMsg.style.opacity = '0';
+        setTimeout(() => successMsg.remove(), 300);
+      }, 3000);
+    });
+  } else {
+    console.warn('Contact form (#contactForm) not found.');
+  }
+
+  // =====================
+  // Project Demo Modal
+  // =====================
+  const demoModal = document.querySelector('.project-demo-modal');
+  const closeModalBtn = document.querySelector('.close-modal');
+  const demoLinks = document.querySelectorAll('.project-link.demo');
+  if (demoModal && closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+      demoModal.style.display = 'none';
+      const videoContainer = demoModal.querySelector('.video-container');
+      if (videoContainer) videoContainer.innerHTML = '';
+    });
+    demoModal.addEventListener('click', e => {
+      if (e.target === demoModal) {
+        demoModal.style.display = 'none';
+        const videoContainer = demoModal.querySelector('.video-container');
+        if (videoContainer) videoContainer.innerHTML = '';
+      }
+    });
+    if (demoLinks.length > 0) {
+      demoLinks.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const projectCard = link.closest('.project-card');
+          if (!projectCard) return;
+          const projectTitle = projectCard.querySelector('.project-title')?.textContent || 'Project Demo';
+          const projectDescription = projectCard.querySelector('.project-description')?.textContent || '';
+          const demoUrl = link.getAttribute('href');
+          const githubLink = projectCard.querySelector('.project-link.code')?.getAttribute('href') || '#';
+          demoModal.querySelector('.demo-title').textContent = projectTitle;
+          demoModal.querySelector('.demo-description').textContent = projectDescription;
+          const githubLinkElement = demoModal.querySelector('#demo-github-link');
+          if (githubLinkElement) githubLinkElement.setAttribute('href', githubLink);
+          const videoUrl = demoUrl.includes('youtube.com') ? demoUrl.replace('watch?v=', 'embed/') : demoUrl;
+          const videoContainer = demoModal.querySelector('.video-container');
+          if (videoContainer) {
+            videoContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+          }
+          demoModal.style.display = 'block';
+        });
+      });
+    } else {
+      console.warn('No demo links (.project-link.demo) found.');
+    }
+  } else {
+    console.warn('Project modal elements (.project-demo-modal or .close-modal) not found.');
+  }
+
+  // =====================
+  // Skills Animation
+  // =====================
+  const skillMeters = document.querySelectorAll('.skill-meter');
+  if (skillMeters.length > 0) {
     if (!('IntersectionObserver' in window)) {
       skillMeters.forEach(meter => meter.classList.add('active'));
       console.warn('IntersectionObserver not supported, using fallback animation.');
@@ -39,104 +274,94 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         },
         {
-          root: null, // Use viewport
+          root: null,
           rootMargin: '0px',
-          threshold: 0.2 // Trigger when 20% visible
+          threshold: 0.2,
         }
       );
-      skillMeters.forEach(meter => skillsObserver.observe(meter));
+      skillMeters.forEach((meter, index) => {
+        meter.style.setProperty('--delay', `${index * 0.1}s`);
+        skillsObserver.observe(meter);
+      });
       console.log('Skills observer initialized');
     }
+  } else {
+    console.warn('No .skill-meter elements found in the DOM.');
   }
 
-  // === Project Filters ===
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
-  if (filterButtons.length > 0) {
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        const filter = button.dataset.filter;
-        projectCards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = 'block';
-            card.classList.add('fade-in');
-          } else {
-            card.style.display = 'none';
-            card.classList.remove('fade-in');
+  // =====================
+  // Metrics Counter
+  // =====================
+  const animateCounters = () => {
+    const counters = document.querySelectorAll('.metric-value');
+    const speed = 200;
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-count');
+      let count = +counter.innerText || 0;
+      const increment = target / speed;
+      const updateCount = () => {
+        if (count < target) {
+          count = Math.min(count + increment, target);
+          counter.innerText = Math.ceil(count);
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  };
+
+  const checkCounters = () => {
+    const metricsSection = document.getElementById('metrics');
+    if (metricsSection) {
+      const metricsPosition = metricsSection.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight * 0.8;
+      if (metricsPosition < screenPosition) {
+        animateCounters();
+        window.removeEventListener('scroll', checkCounters);
+      }
+    }
+  };
+
+  // =====================
+  // Scroll Animations
+  // =====================
+  const animatedElements = document.querySelectorAll('.slide-up, .fade-in, .scale-in');
+  if (animatedElements.length > 0) {
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      if (el.classList.contains('slide-up')) {
+        el.style.transform = 'translateY(30px)';
+      } else if (el.classList.contains('scale-in')) {
+        el.style.transform = 'scale(0.8)';
+      }
+    });
+    const animationObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const delay = el.style.getPropertyValue('--delay') || '0s';
+            el.style.animationDelay = delay;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0) scale(1)';
+            observer.unobserve(el);
           }
         });
-      });
-    });
-  } else {
-    console.warn('No .filter-btn elements found for project filtering.');
-  }
-
-  // === Project Demo Modal ===
-  const projectLinks = document.querySelectorAll('.project-link.demo');
-  const modal = document.querySelector('.project-demo-modal');
-  const closeModal = document.querySelector('.close-modal');
-  if (projectLinks.length > 0 && modal && closeModal) {
-    projectLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const videoUrl = link.dataset.video;
-        const title = link.dataset.title;
-        const description = link.dataset.description;
-        
-        // Update modal content
-        const videoContainer = modal.querySelector('.video-container');
-        const demoTitle = modal.querySelector('.demo-title');
-        const demoDescription = modal.querySelector('.demo-description');
-        
-        if (videoContainer && demoTitle && demoDescription) {
-          videoContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-          demoTitle.textContent = title;
-          demoDescription.textContent = description;
-          modal.style.display = 'block';
-        } else {
-          console.warn('Modal content elements missing.');
-        }
-      });
-    });
-
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) {
-        videoContainer.innerHTML = ''; // Clear iframe to stop video
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
       }
-    });
-
-    // Close modal on click outside
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        const videoContainer = modal.querySelector('.video-container');
-        if (videoContainer) {
-          videoContainer.innerHTML = '';
-        }
-      }
-    });
-  } else {
-    console.warn('Project modal elements missing.');
+    );
+    animatedElements.forEach(el => animationObserver.observe(el));
   }
 
-  // === Mobile Menu Toggle ===
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  } else {
-    console.warn('Mobile menu elements (.menu-toggle or .nav-links) not found.');
-  }
-
-  // === FAQ Accordion ===
+  // =====================
+  // FAQ Accordion
+  // =====================
   const faqItems = document.querySelectorAll('.faq-item');
   if (faqItems.length > 0) {
     faqItems.forEach(item => {
@@ -144,9 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (question) {
         question.addEventListener('click', () => {
           const isActive = item.classList.contains('active');
-          // Close all other FAQs
           faqItems.forEach(i => i.classList.remove('active'));
-          // Toggle current FAQ
           if (!isActive) {
             item.classList.add('active');
           }
@@ -157,41 +380,22 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('No .faq-item elements found.');
   }
 
-  // === Contact Form Submission ===
-  const contactForm = document.querySelector('.contact-form');
-  const formSuccess = document.querySelector('.form-success');
-  if (contactForm) {
-    contactForm.addEventListener('submit', e => {
-      e.preventDefault();
-      // Simulate form submission
-      if (formSuccess) {
-        formSuccess.style.display = 'flex';
-        contactForm.reset();
-        setTimeout(() => {
-          formSuccess.style.display = 'none';
-        }, 3000);
-      } else {
-        console.warn('Form success message element (.form-success) not found.');
-      }
-    });
-  } else {
-    console.warn('Contact form (.contact-form) not found.');
-  }
-
-  // === Smooth Scroll for Navigation Links ===
-  const navLinksItems = document.querySelectorAll('.nav-link');
-  if (navLinksItems.length > 0) {
-    navLinksItems.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-          // Close mobile menu if open
-          if (navLinks) {
-            navLinks.classList.remove('active');
-          }
+  // =====================
+  // Nav Link Hover Effects
+  // =====================
+  const navLinkElements = document.querySelectorAll('.nav-link');
+  if (navLinkElements.length > 0) {
+    navLinkElements.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        const span = link.querySelector('span');
+        if (span) {
+          span.style.transform = 'translateX(3px)';
+        }
+      });
+      link.addEventListener('mouseleave', () => {
+        const span = link.querySelector('span');
+        if (span && !link.classList.contains('active')) {
+          span.style.transform = 'translateX(0)';
         }
       });
     });
@@ -199,24 +403,53 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('No .nav-link elements found.');
   }
 
-  // === Animation on Scroll for Other Sections ===
-  const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .scale-in');
-  if (animatedElements.length > 0) {
-    const animationObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
+  // =====================
+  // Tool Icon Animations
+  // =====================
+  const toolIcons = document.querySelectorAll('.tool-icon');
+  if (toolIcons.length > 0) {
+    toolIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        const title = icon.getAttribute('title');
+        if (title) {
+          const iconElement = icon.querySelector('i');
+          if (iconElement) {
+            switch (title) {
+              case 'Python':
+                iconElement.style.animation = 'spinIcon 0.8s';
+                break;
+              case 'OpenCV':
+                iconElement.style.animation = 'pulseIcon 0.7s';
+                break;
+              case 'MediaPipe':
+                iconElement.style.animation = 'floatIcon 1s infinite alternate';
+                break;
+              case 'TensorFlow':
+                iconElement.style.animation = 'pulseIcon 0.7s infinite alternate';
+                break;
+              case 'PyTorch':
+                iconElement.style.animation = 'flameIcon 0.6s infinite alternate';
+                break;
+            }
           }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-      }
-    );
-    animatedElements.forEach(element => animationObserver.observe(element));
+        }
+      });
+      icon.addEventListener('mouseleave', () => {
+        const iconElement = icon.querySelector('i');
+        if (iconElement) {
+          iconElement.style.animation = '';
+        }
+      });
+    });
+  } else {
+    console.warn('No .tool-icon elements found.');
   }
+
+  // =====================
+  // Initialize Animations
+  // =====================
+  window.addEventListener('load', () => {
+    checkCounters();
+  });
+  window.addEventListener('scroll', checkCounters);
 });
