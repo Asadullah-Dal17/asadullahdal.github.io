@@ -26,7 +26,7 @@
     --primary-text: #FFFFFF;
     --secondary-text: #A0A0A0;
     --border-color: #444444;
-    --accent-color: #FFEC80; /* Slightly lighter for better contrast in dark mode */
+    --accent-color: #FFD700; /* Slightly lighter for better contrast in dark mode */
 }
 
 /* Base Typography */
