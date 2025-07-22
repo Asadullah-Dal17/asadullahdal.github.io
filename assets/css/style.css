@@ -1197,7 +1197,7 @@ body {
 /* Footer */
 .footer {
     background-color: var(--secondary-bg);
-    color: var(--primary-text);
+    color: var(--secondary-text);
     padding: 80px 0;
 }
 
