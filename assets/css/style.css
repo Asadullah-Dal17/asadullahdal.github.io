@@ -87,7 +87,6 @@ body {
     display: block;
 }
 
-/* Section Title */
 .section-title {
     font-size: 2.8rem;
     font-weight: 700;
@@ -757,9 +756,16 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 32px;
-    margin-bottom: 80px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+  }
 }
 
 .project-card {
@@ -1317,243 +1323,369 @@ body {
     animation: slideUp 0.8s ease-out forwards;
 }
 
-/* Responsive Design */
-@media (min-width: 1024px) {
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* Accessibility & Performance Enhancements */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Minimal, non-breaking additions for WCAG 2.2 AA compliance & SEO            */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* A. SKIP-TO-CONTENT LINK (Hidden until :focus) */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10000;
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    }
+.skip-to-content:focus-visible {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  background-color: #0066cc;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 767px) {
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 280px;
-        height: 100%;
-        background-color: var(--primary-bg);
-        flex-direction: column;
-        padding: 90px 24px;
-        transform: translateX(100%);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .nav-links.active {
-        display: flex;
-        transform: translateX(0);
-        animation: slideIn 0.3s ease-out forwards;
-    }
-    
-    .nav-toggle {
-        display: block;
-    }
-    
-    .header {
-        padding: 100px 0;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .typing-animation {
-        font-size: 2.6rem;
-    }
-    
-    .typing-subtitle {
-        font-size: 1.5rem;
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
-    
-    .timeline::before {
-        left: 24px;
-    }
-    
-    .timeline-item {
-        width: 100%;
-        left: 0 !important;
-        padding-left: 56px;
-    }
-    
-    .timeline-item::before {
-        left: 12px !important;
-    }
-    
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 48px;
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-links {
-        justify-content: center;
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .github-stats {
-        flex-direction: column;
-        gap: 16px;
-    }
-    
-    .radio-group {
-        flex-direction: column;
-        gap: 16px;
-    }
-    
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .skill-item {
-        gap: 16px;
-    }
-    
-    .skill-name {
-        flex: 0 0 120px;
-        font-size: 1.1rem;
-    }
-    
-    .skill-percent {
-        flex: 0 0 60px;
-        font-size: 1rem;
-    }
-    
-    .tool-item {
-        width: 140px;
-        height: 140px;
-        padding: 20px;
-    }
-    
-    .tool-item i {
-        font-size: 3.5rem;
-    }
-    
-    .tool-item span {
-        font-size: 1rem;
-    }
-    
-    .projects-banner {
-        height: 250px;
-    }
-    
-    .btn, .filter-btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-    
-    .project-filters {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .filter-btn {
-        width: 100%;
-        max-width: 240px;
-    }
-    
-    .tool-item:hover, .timeline-content:hover, .project-card:hover .project-image {
-        transform: none;
-    }
-    
-    .project-card:hover::after {
-        opacity: 0;
-    }
-    
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
+/* B. KEYBOARD FOCUS OUTLINE (High contrast, using existing palette color #0066cc) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
 }
 
-@media (max-width: 480px) {
-    .section {
-        padding: 60px 0;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .typing-animation {
-        font-size: 2rem;
-    }
-    
-    .typing-subtitle {
-        font-size: 1.3rem;
-    }
-    
-    .profile-image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .cta-content h2 {
-        font-size: 2rem;
-    }
-    
-    .cta-content p {
-        font-size: 1rem;
-    }
-    
-    .contact-form {
-        padding: 24px;
-    }
-    
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .skill-item {
-        gap: 12px;
-    }
-    
-    .skill-name {
-        flex: 0 0 100px;
-        font-size: 0.95rem;
-    }
-    
-    .skill-percent {
-        flex: 0 0 50px;
-        font-size: 0.9rem;
-    }
-    
-    .tool-item {
-        width: 120px;
-        height: 120px;
-        padding: 16px;
-    }
-    
-    .tool-item i {
-        font-size: 3rem;
-    }
-    
-    .tool-item span {
-        font-size: 0.9rem;
-    }
-    
-    .projects-banner {
-        height: 200px;
-    }
+/* Ensure nav links get focus */
+.nav-link:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
 }
+
+/* Ensure filter buttons get focus */
+.filter-btn:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Ensure primary buttons get focus */
+.btn:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* C. MOBILE TAP TARGETS (44×44px minimum area without breaking layout) */
+@media (max-width: 768px) {
+  /* Nav links */
+  .nav-link {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.25rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Filter/category buttons */
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Radio labels */
+  .radio-label {
+    padding: 0.5rem 0.75rem;
+    display: inline-block;
+    cursor: pointer;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Social links */
+  .social-link {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* D. IMAGE OPTIMIZATION (Reserve space to prevent CLS) */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.project-image {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.profile-image {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+/* E. RESPECT PREFERS-REDUCED-MOTION (Disable animations for motion-sensitive users) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable specific animations if present */
+  .slide-up,
+  .typing-animation,
+  .typing-subtitle {
+    animation: none !important;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* END ACCESSIBILITY & PERFORMANCE ENHANCEMENTS */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* DESIGN & ACCESSIBILITY POLISH (2025-11-17)                                */
+/* Minimal tweaks for spacing, typography, focus, and performance             */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* A. BODY TEXT RHYTHM (comfortable line-height) */
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* B. HEADING HIERARCHY (ensure consistent spacing) */
+h1, h2, h3, h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+/* C. SECTION PADDING (normalize vertical rhythm) */
+.section {
+  padding: 3rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 4rem 2rem;
+  }
+}
+
+/* D. SKIP-TO-CONTENT LINK (hidden until :focus) */
+.skip-to-content {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+.skip-to-content:focus-visible {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  background-color: #0066cc;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* E. KEYBOARD FOCUS OUTLINE (high-contrast, using existing palette color) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.nav-link:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.filter-btn:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* F. BUTTON & CTA POLISH (slight size bump for touch targets) */
+.btn {
+  padding: 0.75rem 1.5rem;
+  min-height: 44px;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* G. MOBILE TAP TARGETS (44×44px minimum) */
+@media (max-width: 768px) {
+  .nav-link {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 0.75rem 1.25rem;
+    min-height: 44px;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .social-link {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .radio-label {
+    padding: 0.5rem 0.75rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+/* H. IMAGE OPTIMIZATION (reserve space for CLS prevention) */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.project-image {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.profile-image {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+/* I. GRID CONSISTENCY (project cards) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+  }
+}
+
+/* J. RESPECT PREFERS-REDUCED-MOTION (accessibility for motion-sensitive users) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .slide-up,
+  .typing-animation,
+  .typing-subtitle {
+    animation: none !important;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  .card:hover,
+  .project-card:hover,
+  .teaching-card:hover,
+  .cert-card:hover {
+    transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* END DESIGN POLISH */
+/* ═══════════════════════════════════════════════════════════════════════════ */

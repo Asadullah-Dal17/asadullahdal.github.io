@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: *.pdf
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Sitemap reference
+Sitemap: https://asadullah-dal17.github.io/sitemap.xml
