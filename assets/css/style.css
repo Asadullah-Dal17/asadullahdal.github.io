@@ -1323,162 +1323,105 @@ body {
     animation: slideUp 0.8s ease-out forwards;
 }
 
-/* Accessibility & Performance Enhancements */
-/* ═══════════════════════════════════════════════════════════════════════════ */
-/* Minimal, non-breaking additions for WCAG 2.2 AA compliance & SEO            */
-/* ═══════════════════════════════════════════════════════════════════════════ */
+/* ============================================================
+   ACCESSIBILITY & POLISH ENHANCEMENTS
+   ============================================================ */
 
-/* A. SKIP-TO-CONTENT LINK (Hidden until :focus) */
+/* Skip-to-content link (keyboard navigation) */
 .skip-to-content {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  z-index: 10000;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0066cc;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    font-weight: 600;
 }
 
-.skip-to-content:focus-visible {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  width: auto;
-  height: auto;
-  background-color: #0066cc;
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.skip-to-content:focus {
+    top: 0;
 }
 
-/* B. KEYBOARD FOCUS OUTLINE (High contrast, using existing palette color #0066cc) */
-button:focus-visible,
+/* Visible keyboard focus ring using your primary brand color */
 a:focus-visible,
+button:focus-visible,
 input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 2px;
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
-/* Ensure nav links get focus */
-.nav-link:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 2px;
-}
-
-/* Ensure filter buttons get focus */
-.filter-btn:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 2px;
-}
-
-/* Ensure primary buttons get focus */
-.btn:focus-visible {
-  outline: 3px solid #0066cc;
-  outline-offset: 2px;
-}
-
-/* C. MOBILE TAP TARGETS (44×44px minimum area without breaking layout) */
+/* Increase tap targets on mobile (min 44px × 44px) */
 @media (max-width: 768px) {
-  /* Nav links */
-  .nav-link {
-    padding: 0.75rem 1rem;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* Buttons */
-  .btn {
-    padding: 0.75rem 1.25rem;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Filter/category buttons */
-  .filter-btn {
-    padding: 0.5rem 1rem;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* Radio labels */
-  .radio-label {
-    padding: 0.5rem 0.75rem;
-    display: inline-block;
-    cursor: pointer;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* Social links */
-  .social-link {
-    padding: 0.75rem 1rem;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+    .nav-link,
+    .btn,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px; /* Increased from existing */
+    }
+    
+    .filter-btn {
+        min-height: 44px;
+        padding: 12px 16px;
+    }
+    
+    .social-link {
+        padding: 12px;
+    }
 }
 
-/* D. IMAGE OPTIMIZATION (Reserve space to prevent CLS) */
-img {
-  height: auto;
-  max-width: 100%;
-}
-
-.project-image {
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-.profile-image {
-  aspect-ratio: 1;
-  object-fit: cover;
-}
-
-.modal-image {
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-}
-
-/* E. RESPECT PREFERS-REDUCED-MOTION (Disable animations for motion-sensitive users) */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  /* Disable specific animations if present */
-  .slide-up,
-  .typing-animation,
-  .typing-subtitle {
-    animation: none !important;
-  }
-
-  .btn:hover {
-    transform: none;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .slide-up {
+        animation: none;
+        opacity: 1;
+    }
+    
+    .typing-animation,
+    .typing-subtitle {
+        animation: none;
+    }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════ */
-/* END ACCESSIBILITY & PERFORMANCE ENHANCEMENTS */
-/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Ensure preloader respects reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .preloader-spinner {
+        animation: none;
+    }
+}
+
+/* Print styles for better accessibility */
+@media print {
+    .preloader,
+    .navbar,
+    .theme-toggle,
+    .nav-toggle,
+    .back-to-top,
+    .cta-section {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* DESIGN & ACCESSIBILITY POLISH (2025-11-17)                                */
