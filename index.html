@@ -36,13 +36,14 @@
     <meta name="twitter:site" content="@ai_phile">
     
     <!-- Favicon & Theme -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="theme-color" content="#0066cc">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#FFD700">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- JSON-LD Structured Data (Person Schema) -->
     <script type="application/ld+json">
@@ -80,14 +81,14 @@
 
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#" class="nav-logo" aria-label="Asadullah Dal Logo">AD</a>
+            <a href="#home" class="nav-logo" aria-label="Asadullah Dal Logo">AD</a>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#teaching" class="nav-link">Teaching</a></li>
+                <li><a href="#fiverr" class="nav-link">Hire Me</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><button class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-adjust"></i></button>
                 </li>
@@ -110,14 +111,14 @@
                     </div>
                 </div>
                 <div class="header-info slide-up">
+                    <div class="code-prefix code-font">const developer = {</div>
                     <h1 class="typing-animation">Hi, I'm Asadullah</h1>
                     <h2 class="subtitle typing-subtitle">Computer Vision Developer & Educator</h2>
-                    <div class="role">Building practical vision projects while teaching OpenCV, MediaPipe, and hands-on AI</div>
-                    <p class="bio">With 5+ years of experience, I create real-world computer vision solutions and teach step-by-step tutorials that go from basics to deployment. I love making complex ideas simple.</p>
+                    <div class="code-suffix code-font">};</div>
+                    <p class="bio">Building practical computer vision solutions with OpenCV, MediaPipe, and Python. Creating open-source projects and teaching step-by-step.</p>
                     <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-cta">See My Projects</a>
-                        <a href="#teaching" class="btn btn-secondary">Explore Courses</a>
-                        <a href="#contact" class="btn btn-secondary">Work With Me</a>
+                        <a href="#projects" class="btn btn-cta">Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Contact</a>
                     </div>
                     <div class="social-links">
                         <a href="https://github.com/Asadullah-Dal17" class="social-link"><i class="fab fa-github"></i>
@@ -136,29 +137,13 @@
         </header>
 
         <section class="about-section section" id="about">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">About</h2>
             <div class="about-content slide-up">
-                <h3>About Me</h3>
-                <p class="location"><i class="fas fa-map-marker-alt"></i> Tando Muhammad Khan, Pakistan</p>
-                <p>I'm a Computer Vision developer and educator based in Sindh, Pakistan. I build practical solutions with OpenCV and MediaPipe, then share what I learn through open-source projects and tutorials. My work spans real-time tracking, object detection, and accessibility apps—all designed to solve real problems.</p>
-                <p>Whether you need a custom vision project or want to learn CV step-by-step, I'm here to help. Over 5 years, I've delivered 20+ freelance solutions (4.9/5 rating), created 63+ tutorials, and taught 100+ students.</p>
-                
-                <div class="expertise">
-                    <h4>What I Offer</h4>
-                    <ul>
-                        <li><strong>Custom Development:</strong> Freelance computer vision solutions—tracking, detection, accessibility apps</li>
-                        <li><strong>Open-Source Projects:</strong> 128+ repos with reusable code and tutorials on GitHub</li>
-                        <li><strong>Courses & Teaching:</strong> Step-by-step lessons for OpenCV, MediaPipe, and hands-on AI (60+ videos)</li>
-                        <li><strong>Technical Education:</strong> Teaching computer science, physics, and chemistry at Government Boys Campus High School</li>
-                    </ul>
-                </div>
-                
+                <p class="location code-font"><i class="fas fa-map-marker-alt"></i> Tando Muhammad Khan, Pakistan</p>
+                <p>Computer Vision developer and educator. Building practical solutions with OpenCV and MediaPipe. 5+ years experience, 20+ projects delivered, 128+ GitHub repos.</p>
                 <div class="education">
-                    <h4>Background</h4>
-                    <ul>
-                        <li><strong>BS Electronics</strong> — University of Sindh, Jamshoro (2020)</li>
-                        <li><strong>JEST Certified</strong> — Junior Elementary School Teacher (2022)</li>
-                    </ul>
+                    <p class="code-font">// Education</p>
+                    <p>BS Electronics — University of Sindh (2020) | JEST Certified (2022)</p>
                 </div>
             </div>
         </section>
@@ -166,19 +151,18 @@
         <section class="metrics-section section">
             <div class="metrics-grid container">
                 <div class="metric-card slide-up">
-                    <div class="metric-number">20</div>
-                    <div class="metric-label">Clients Served</div>
+                    <div class="metric-icon"><i class="fas fa-eye"></i></div>
+                    <div class="metric-number">20+</div>
+                    <div class="metric-label">Projects Delivered</div>
                 </div>
                 <div class="metric-card slide-up">
-                    <div class="metric-number">63</div>
-                    <div class="metric-label">Tutorials Created</div>
+                    <div class="metric-icon"><i class="fas fa-code"></i></div>
+                    <div class="metric-number">128</div>
+                    <div class="metric-label">GitHub Repos</div>
                 </div>
                 <div class="metric-card slide-up">
-                    <div class="metric-number">4000</div>
-                    <div class="metric-label">Former YouTube Subs</div>
-                </div>
-                <div class="metric-card slide-up">
-                    <div class="metric-number">100</div>
+                    <div class="metric-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="metric-number">100+</div>
                     <div class="metric-label">Students Taught</div>
                 </div>
             </div>
@@ -189,82 +173,33 @@
             <div class="timeline container">
                 <div class="timeline-item">
                     <div class="timeline-content slide-up">
-                        <div class="timeline-date">2022 – Present</div>
-                        <h3>Junior School Teacher</h3>
-                        <h4>Government Boys Campus High School, Dadoon</h4>
-                        <ul>
-                            <li>Teach Computer Basics to 6th and 7th grade students</li>
-                            <li>Class teacher for 8th grade English</li>
-                            <li>Teach Physics and Chemistry to 9th grade students</li>
-                            <li>Developed practical learning modules for students</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content slide-up">
                         <div class="timeline-date">2019 – Present</div>
                         <h3>Freelance Computer Vision Developer</h3>
-                        <h4>International Clients</h4>
-                        <ul>
-                            <li>Delivered 20+ custom computer vision solutions</li>
-                            <li>Specialized in accessibility applications</li>
-                            <li>Maintained 4.9/5 average client rating</li>
-                            <li>Developed reusable code libraries</li>
-                        </ul>
+                        <p>Delivered 20+ custom solutions, specialized in accessibility apps, maintained 4.9/5 rating.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content slide-up">
-                        <div class="timeline-date">2020 – 2023</div>
-                        <h3>Educational Content Creator</h3>
-                        <h4>YouTube Channel</h4>
-                        <ul>
-                            <li>Produced 63 tutorials on computer vision</li>
-                            <li>Created beginner-friendly AI resources</li>
-                            <li>Currently rebuilding content on new channel</li>
-                        </ul>
+                        <div class="timeline-date">2022 – Present</div>
+                        <h3>Junior School Teacher</h3>
+                        <p>Teaching Computer Basics, English, Physics & Chemistry at Government Boys Campus High School.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="teaching-section section" id="teaching">
-            <h2 class="section-title">Teaching</h2>
-            <div class="teaching-grid container">
-                <div class="teaching-card slide-up">
-                    <i class="fas fa-laptop teaching-icon"></i>
-                    <h3>Computer Basics (Grades 6–7)</h3>
-                    <p>Hands-on introduction to computers, software, and digital literacy. Building confidence with technology from day one.</p>
-                    <div class="teaching-meta">Since 2022 • Government Boys Campus High School</div>
-                </div>
-                <div class="teaching-card slide-up">
-                    <i class="fas fa-book teaching-icon"></i>
-                    <h3>English Language (Grade 8)</h3>
-                    <p>Interactive lessons in reading, writing, and communication. Practical skills for clear, confident expression.</p>
-                    <div class="teaching-meta">Since 2022 • Government Boys Campus High School</div>
-                </div>
-                <div class="teaching-card slide-up">
-                    <i class="fas fa-flask teaching-icon"></i>
-                    <h3>Physics & Chemistry (Grade 9)</h3>
-                    <p>Hands-on experiments and real-world applications. Making science tangible and exciting for students.</p>
-                    <div class="teaching-meta">Since 2022 • Government Boys Campus High School</div>
-                </div>
-            </div>
-        </section>
 
         <section class="projects-section section" id="projects">
             <h2 class="section-title">Projects</h2>
             <div class="projects-header container">
                 <div class="project-filters" role="tablist">
                     <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
-                    <button class="filter-btn" data-filter="Computer Vision" role="tab" aria-selected="false">Computer
-                        Vision</button>
-                    <button class="filter-btn" data-filter="Accessibility" role="tab"
-                        aria-selected="false">Accessibility</button>
-                    <button class="filter-btn" data-filter="Open Source" role="tab" aria-selected="false">Open
-                        Source</button>
-                    <button class="filter-btn" data-filter="Education" role="tab" aria-selected="false">Education</button>
-                    <button class="filter-btn" data-filter="Robotics" role="tab" aria-selected="false">Robotics</button>
+                    <button class="filter-btn" data-filter="Computer Vision" role="tab" aria-selected="false">
+                        <i class="fas fa-eye"></i> Computer Vision
+                    </button>
+                    <button class="filter-btn" data-filter="Accessibility" role="tab" aria-selected="false">
+                        <i class="fas fa-universal-access"></i> Accessibility
+                    </button>
                 </div>
             </div>
             <div class="projects-grid container">
@@ -274,123 +209,47 @@
                          alt="Real-Time Eyes Position Estimator"
                          class="project-image" loading="lazy" width="600" height="375">
                     <div class="project-content">
-                        <h3>Real-Time Eyes Tracking (MediaPipe)</h3>
-                        <p>Enable hands-free computer control with high-precision eye tracking—perfect for accessibility and hands-free apps.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2023</span>
-                            <span class="project-categories">Accessibility • Computer Vision</span>
-                        </div>
+                        <div class="project-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Real-Time Eyes Tracking</h3>
+                        <p>High-precision eye tracking for hands-free computer control and accessibility applications.</p>
                         <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
+                            <a href="https://github.com/Asadullah-Dal17" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
-
                     </div>
                 </a>
                 <a class="project-card slide-up" data-tags="Computer Vision,Open Source">
                     <img src="assets/images/projects/distance-measurement.png" alt="Distance Measurement using Single Camera" class="project-image" loading="lazy" width="600" height="375">
                     <div class="project-content">
-                        <h3>Distance Measurement with Single Camera</h3>
-                        <p>Detect objects and estimate distance in real-time—works with face detection, YOLOv4, and Raspberry Pi.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2021</span>
-                            <span class="project-categories">Computer Vision • Open Source</span>
-                        </div>
+                        <div class="project-icon"><i class="fas fa-ruler-combined"></i></div>
+                        <h3>Distance Measurement</h3>
+                        <p>Real-time object detection and distance estimation using single camera with YOLOv4 and Raspberry Pi.</p>
                         <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
+                            <a href="https://github.com/Asadullah-Dal17" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
-
                     </div>
                 </a>
                 <a class="project-card slide-up" data-tags="Education,Open Source">
                     <img src="assets/images/projects/mediapipe-course.png" alt="MediaPipe Computer Vision Course" class="project-image" loading="lazy" width="600" height="375">
                     <div class="project-content">
-                        <h3>MediaPipe Computer Vision Course</h3>
-                        <p>Learn gesture, face, and pose tracking from scratch—with code, projects, and deployment guides.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2023</span>
-                            <span class="project-categories">Education • Open Source</span>
-                        </div>
+                        <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>MediaPipe Course</h3>
+                        <p>Complete course on gesture, face, and pose tracking with hands-on projects and deployment guides.</p>
                         <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
+                            <a href="https://github.com/Asadullah-Dal17" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
-
-                    </div>
-                </a>
-                <a class="project-card slide-up" data-tags="Computer Vision,Open Source">
-                    <img src="assets/images/projects/distance-measurement.png" alt="YOLOv4 Detector and Distance Estimator" class="project-image" loading="lazy" width="600" height="375">
-                    <div class="project-content">
-                        <h3>YOLOv4 Object Detection & Distance</h3>
-                        <p>Real-time detection and range estimation for multiple object classes—customize with your own reference images.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2021</span>
-                            <span class="project-categories">Computer Vision • Open Source</span>
-                        </div>
-                        <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
-                        </div>
-
-                    </div>
-                </a>
-                <a class="project-card slide-up" data-tags="Education,OpenCV">
-                    <img src="assets/images/projects/ar-course.png" alt="Basic Augmented Reality with OpenCV" class="project-image" loading="lazy" width="600" height="375">
-                    <div class="project-content">
-                        <h3>Basic Augmented Reality (OpenCV)</h3>
-                        <p>Build AR apps with markers, pose estimation, and camera calibration—no expensive tools needed.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2023</span>
-                            <span class="project-categories">Education • OpenCV</span>
-                        </div>
-                        <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
-                        </div>
-
-                    </div>
-                </a>
-                <a class="project-card slide-up" data-tags="Accessibility,Computer Vision">
-                    <img src="assets/images/projects/eyes-estimator.png" alt="Eyes Tracking with OpenCV and Dlib" class="project-image" loading="lazy" width="600" height="375">
-                    <div class="project-content">
-                        <h3>Eyes Tracking: OpenCV + Dlib</h3>
-                        <p>Alternative eye tracking approach with blink detection and EAR (Eye Aspect Ratio) calculation—compare with MediaPipe.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2022</span>
-                            <span class="project-categories">Accessibility • Computer Vision</span>
-                        </div>
-                        <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
-                        </div>
-
-                    </div>
-                </a>
-                <a class="project-card slide-up" data-tags="Robotics,Computer Vision">
-                    <img src="assets/images/projects/face-robot.png" alt="Face Following Robot with Distance Estimation" class="project-image" loading="lazy" width="600" height="375">
-                    <div class="project-content">
-                        <h3>Face-Following Robot (OpenCV)</h3>
-                        <p>Build a robot that follows faces using a single camera—includes distance estimation and Arduino integration.</p>
-                        <div class="project-meta">
-                            <span class="project-year">2021</span>
-                            <span class="project-categories">Robotics • Computer Vision</span>
-                        </div>
-                        <div class="project-links">
-                            <span class="btn btn-sm btn-primary">Code</span>
-                            <span class="btn btn-sm btn-secondary">Demo</span>
-                        </div>
-
                     </div>
                 </a>
             </div>
             <div class="github-cta container slide-up">
-                <h3>Explore more projects on my GitHub</h3>
-                <div class="github-stats">
-                    <span><i class="fas fa-book"></i> 128 Repositories</span>
-                    <span><i class="fas fa-star"></i> 88 Stars</span>
-                </div>
-                <a href="#" class="btn btn-cta">Visit GitHub</a>
+                <a href="https://github.com/Asadullah-Dal17" target="_blank" rel="noopener noreferrer" class="btn btn-secondary code-font">
+                    <i class="fab fa-github"></i> View All Projects on GitHub
+                </a>
             </div>
         </section>
 
@@ -524,118 +383,105 @@
             </div>
         </section>
 
-        <section class="certifications-section section" id="certifications">
-            <h2 class="section-title">Certifications & Achievements</h2>
-            <div class="certifications-grid container">
-                <div class="certification-card slide-up">
-                    <i class="fas fa-certificate certification-icon"></i>
-                    <h3>JEST Certified Educator</h3>
-                    <p>Qualified Junior Elementary School Teacher (2022)</p>
-                    <div class="certification-year">2022</div>
-                </div>
-                <div class="certification-card slide-up">
-                    <i class="fas fa-graduation-cap certification-icon"></i>
-                    <h3>BS Electronics</h3>
-                    <p>University of Sindh, Jamshoro (2020)</p>
-                    <div class="certification-year">2020</div>
-                </div>
-                <div class="certification-card slide-up">
-                    <i class="fas fa-code certification-icon"></i>
-                    <h3>OpenCV Contributor</h3>
-                    <p>Community code contributions (2023)</p>
-                    <div class="certification-year">2023</div>
-                </div>
-                <div class="certification-card slide-up">
-                    <i class="fas fa-star certification-icon"></i>
-                    <h3>4.9/5 Freelance Rating</h3>
-                    <p>20+ satisfied clients (2019-Present)</p>
-                    <div class="certification-year">2019 – Present</div>
-                </div>
-            </div>
-        </section>
 
-        <section class="tools-section section">
-            <h2 class="section-title">Core Development Tools</h2>
-            <div class="tools-grid container">
-                <div class="tool-item slide-up"><i class="fab fa-python"></i><span>Python</span></div>
-                <div class="tool-item slide-up"><i class="fas fa-camera"></i><span>OpenCV</span></div>
-                <div class="tool-item slide-up"><i class="fas fa-eye"></i><span>MediaPipe</span></div>
+        <section class="fiverr-section section" id="fiverr">
+            <div class="fiverr-container container">
+                <div class="fiverr-content slide-up">
+                    <div class="fiverr-header">
+                        <div class="fiverr-icon">
+                            <i class="fab fa-fiverr"></i>
+                        </div>
+                        <div class="fiverr-header-text">
+                            <h2 class="fiverr-title">Hire Me on Fiverr</h2>
+                            <span class="fiverr-badge">New Seller</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fiverr-categories">
+                        <div class="fiverr-category-item">
+                            <i class="fas fa-code"></i>
+                            <span class="code-font">Computer Vision</span>
+                        </div>
+                        <div class="fiverr-category-item">
+                            <i class="fas fa-microchip"></i>
+                            <span class="code-font">Arduino</span>
+                        </div>
+                        <div class="fiverr-category-item">
+                            <i class="fas fa-microchip"></i>
+                            <span class="code-font">Raspberry Pi</span>
+                        </div>
+                        <div class="fiverr-category-item">
+                            <i class="fas fa-eye"></i>
+                            <span class="code-font">OpenCV</span>
+                        </div>
+                        <div class="fiverr-category-item">
+                            <i class="fas fa-brain"></i>
+                            <span class="code-font">MediaPipe</span>
+                        </div>
+                    </div>
 
-                <div class="tool-item slide-up"><i class="fas fa-microchip"></i><span>Raspberry Pi</span></div>
-                <div class="tool-item slide-up"><i class="fab fa-git-alt"></i><span>Git</span></div>
-                <div class="tool-item slide-up"><i class="fab fa-youtube"></i><span>YouTube</span></div>
-                <div class="tool-item slide-up"><i class="fas fa-code"></i><span>VS Code</span></div>
-            </div>
-        </section>
+                    <div class="fiverr-description">
+                        <p class="code-font">// Available for computer vision projects</p>
+                        <p>Custom solutions, object detection, accessibility apps, and embedded vision systems.</p>
+                    </div>
 
-        <section class="cta-section section">
-            <div class="cta-content container slide-up">
-                <h2>Ready to Collaborate?</h2>
-                <p>Let’s work together to bring your vision to life with cutting-edge computer vision solutions.</p>
-                <a href="#contact" class="btn btn-cta">Get in Touch</a>
+                    <a href="https://www.fiverr.com/users/asadullahdal482" target="_blank" rel="noopener noreferrer" class="btn btn-fiverr" id="fiverrLink">
+                        <i class="fab fa-fiverr"></i>
+                        <span>View Profile</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
         <section class="contact-section section" id="contact">
-            <h2 class="section-title">Let's Collaborate</h2>
+            <h2 class="section-title">Contact</h2>
             <div class="contact-content container">
                 <div class="contact-info slide-up">
-                    <h3>Contact Information</h3>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>asadullah92c@gmail.com</span>
+                        <span class="code-font">asadullah92c@gmail.com</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Tando Muhammad Khan, Pakistan</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Mon-Fri, 9AM-5PM PST</span>
+                        <span class="code-font">Tando Muhammad Khan, Pakistan</span>
                     </div>
                 </div>
-                <div class="contact-form slide-up">
+                <form class="contact-form slide-up" id="contactForm" novalidate>
+                    <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" required aria-required="true">
+                        <input type="text" id="name" name="name" required aria-required="true" aria-invalid="false">
+                        <span class="error-message" id="nameError"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" required aria-required="true">
+                        <input type="email" id="email" name="email" required aria-required="true" aria-invalid="false">
+                        <span class="error-message" id="emailError"></span>
                     </div>
                     <div class="form-group">
                         <label for="project-type">Project Type</label>
-                        <select id="project-type" required aria-required="true">
-                            <option value="" disabled selected>Select project type...</option>
-                            <option value="freelance">Freelance Project</option>
-                            <option value="educational">Educational Content</option>
-                            <option value="teaching">Teaching Inquiry</option>
-                            <option value="consulting">Technical Consulting</option>
+                        <select id="project-type" name="project-type" required aria-required="true" aria-invalid="false">
+                            <option value="" disabled selected>Select...</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="educational">Education</option>
+                            <option value="consulting">Consulting</option>
                             <option value="other">Other</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="budget">Budget: <span id="budgetDisplay">$1000</span></label>
-                        <input type="range" id="budget" min="50" max="1000" step="1" value="200"
-                            aria-label="Project budget range">
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Contact Method</label>
-                        <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="contact-method" value="email" checked
-                                    aria-checked="true"> Email</label>
-                            <label class="radio-label"><input type="radio" name="contact-method" value="whatsapp">
-                                WhatsApp</label>
-                            <label class="radio-label"><input type="radio" name="contact-method" value="video"> Video
-                                Call</label>
-                        </div>
+                        <span class="error-message" id="projectTypeError"></span>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" rows="5" required aria-required="true"></textarea>
+                        <textarea id="message" name="message" rows="5" required aria-required="true" aria-invalid="false"></textarea>
+                        <span class="error-message" id="messageError"></span>
                     </div>
-                    <button type="submit" class="btn btn-cta">Send Message</button>
-                </div>
+                    <button type="submit" class="btn btn-cta" id="submitBtn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loader" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
+                </form>
             </div>
         </section>
     </main>

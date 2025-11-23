@@ -1,8 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Theme toggle
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        lastScroll = currentScroll;
+    });
+
+    // Theme toggle with persistence
     const themeToggle = document.querySelector('.theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+    }
+    
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark');
+        const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', currentTheme);
     });
 
     // Mobile nav toggle
@@ -188,10 +210,163 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Budget slider
+    // Budget slider - fix initial display
     const budgetInput = document.querySelector('#budget');
     const budgetDisplay = document.querySelector('#budgetDisplay');
-    budgetInput.addEventListener('input', () => {
+    if (budgetInput && budgetDisplay) {
         budgetDisplay.textContent = `$${budgetInput.value}`;
+        budgetInput.addEventListener('input', () => {
+            budgetDisplay.textContent = `$${budgetInput.value}`;
+        });
+    }
+
+    // Contact form handling
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+
+        // Real-time validation
+        const inputs = contactForm.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    validateField(input);
+                }
+            });
+        });
+
+        function validateField(field) {
+            const errorElement = document.getElementById(field.id + 'Error');
+            let isValid = true;
+            let errorMessage = '';
+
+            // Remove previous error state
+            field.classList.remove('error');
+            field.setAttribute('aria-invalid', 'false');
+            if (errorElement) errorElement.textContent = '';
+
+            // Validate based on field type
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                isValid = false;
+                errorMessage = 'This field is required';
+            } else if (field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid email address';
+            } else if (field.id === 'message' && field.value.trim().length < 10) {
+                isValid = false;
+                errorMessage = 'Message must be at least 10 characters';
+            }
+
+            if (!isValid) {
+                field.classList.add('error');
+                field.setAttribute('aria-invalid', 'true');
+                if (errorElement) errorElement.textContent = errorMessage;
+            }
+
+            return isValid;
+        }
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validate all fields
+            let isFormValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+
+            if (!isFormValid) {
+                showMessage('Please fix the errors in the form', 'error');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-flex';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                projectType: document.getElementById('project-type').value,
+                budget: document.getElementById('budget').value,
+                contactMethod: document.querySelector('input[name="contact-method"]:checked').value,
+                message: document.getElementById('message').value
+            };
+
+            // Use mailto as fallback (can be replaced with Formspree, EmailJS, etc.)
+            try {
+                const subject = encodeURIComponent(`Portfolio Contact: ${formData.projectType}`);
+                const body = encodeURIComponent(
+                    `Name: ${formData.name}\n` +
+                    `Email: ${formData.email}\n` +
+                    `Project Type: ${formData.projectType}\n` +
+                    `Budget: $${formData.budget}\n` +
+                    `Preferred Contact: ${formData.contactMethod}\n\n` +
+                    `Message:\n${formData.message}`
+                );
+                
+                // For now, use mailto (you can replace this with a service like Formspree)
+                window.location.href = `mailto:asadullah92c@gmail.com?subject=${subject}&body=${body}`;
+                
+                // Show success message
+                setTimeout(() => {
+                    showMessage('Thank you! Your message has been sent. I\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                    budgetDisplay.textContent = '$200';
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoader.style.display = 'none';
+                }, 500);
+            } catch (error) {
+                showMessage('There was an error sending your message. Please try again or email me directly.', 'error');
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoader.style.display = 'none';
+            }
+        });
+
+        function showMessage(message, type) {
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            formMessage.setAttribute('role', 'alert');
+            
+            // Scroll to message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                    formMessage.className = 'form-message';
+                }, 5000);
+            }
+        }
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '#!') {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
     });
 });
